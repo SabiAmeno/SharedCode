@@ -35,7 +35,6 @@ private:
     QTimer      timer;
     bool        is_show = true;
     uint64_t    time_out = 0;
-    QString     msgs;
 
     QPropertyAnimation *animation = nullptr;
 //	static ToolTip*    tip_instance;

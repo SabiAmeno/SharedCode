@@ -9,8 +9,6 @@
 #define TIMEOUT_ISVALID(x) \
     (x > 0)
 
-//ToolTip* ToolTip::tip_instance = nullptr;
-
 ToolTip::ToolTip(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ToolTip)
@@ -43,8 +41,7 @@ ToolTip * ToolTip::Instance()
 
 void ToolTip::setToolMesg(const QString &tip)
 {
-    msgs = tip;
-    ui->textBrowser->setPlainText(msgs);
+    ui->textBrowser->setPlainText(tip);
 }
 
 void ToolTip::setTimeout(uint64_t timeout)
@@ -87,15 +84,12 @@ void ToolTip::leaveEvent(QEvent *event)
 {
     QRect scope(pos(), QSize(width(), height()));
 	is_show = scope.contains(QCursor::pos());
-	qDebug() << "Pos:(" << QCursor::pos().x() << "," << QCursor::pos().y() << ")";
-	qDebug() << "Leave";
 }
 
 void ToolTip::mouseMoveEvent(QMouseEvent *event)
 {
     QRect scope(pos(), QSize(width(), height()));
-    if(scope.contains(event->pos()))
-        is_show = true;
+    is_show = scope.contains(event->pos());
 }
 
 void ToolTip::ShowTip(const QPoint& pos, const QString &tip, uint64_t timeout, QWidget *parent)
